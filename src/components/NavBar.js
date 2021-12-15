@@ -9,7 +9,7 @@ import {
   Tooltip
 } from "@mui/material";
 
-import Store from "../context";
+import Store from "../store/context";
 import NavDrawer from "./NavDrawer";
 
 const useStyles = makeStyles(theme => ({
@@ -27,8 +27,6 @@ const useStyles = makeStyles(theme => ({
 const NavBar = () => {
   const { state, dispatch } = useContext(Store);
   const [drawerOpened, setDrawerOpened] = useState(false);
-
-  console.log(`state`, state)
 
   const classes = useStyles();
   let mode;
@@ -80,4 +78,5 @@ const NavBar = () => {
     </div>
   );
 };
+
 export default NavBar;

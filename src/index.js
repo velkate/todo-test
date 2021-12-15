@@ -7,9 +7,9 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
 //Add context, reducer and usePersist(LocalStorage)
-import Store from "./context";
-import reducer from "./reducer";
-import { usePersistedContext, usePersistedReducer } from "./usePersist";
+import Store from "./store/context";
+import reducer from "./store/reducer";
+import { usePersistedContext, usePersistedReducer } from "./hooks/usePersist";
 
 // Metarial-UI Theme(Dark or Light)
 import { createTheme, ThemeProvider } from '@mui/material/styles';

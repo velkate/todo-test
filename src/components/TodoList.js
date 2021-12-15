@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Store from "../context";
+import Store from "../store/context";
 import ItemList from "./ItemList";
 
 const TodoList = () => {
@@ -12,8 +12,9 @@ const TodoList = () => {
       <ItemList list={state.todos} />
       <br />
       <br />
-      {!!completedCount && <ItemList list={state.todos} complited />}
+      {!!completedCount && <ItemList list={state.todos} completed />}
     </div>
   );
 };
+
 export default TodoList;

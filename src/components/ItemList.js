@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Store from "../context";
+import Store from "../store/context";
 import { Delete, CheckCircle, Cancel } from "@mui/icons-material";
 import {
   List,
@@ -11,23 +11,23 @@ import {
   Typography
 } from "@mui/material";
 
-const ItemList = ({ list, complited }) => {
+const ItemList = ({ list, completed }) => {
   const { dispatch } = useContext(Store);
 
-  const currentList = complited ? list.filter(t => t.completed === true) : list.filter(t => t.completed === false)
+  const currentList = completed ? list.filter(t => t.completed === true) : list.filter(t => t.completed === false)
   let comment = (currentList.length === 0) ? "So when you are free, start another work to get tired!" : "";
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="h6">{complited ? `Complited Todos` : `Todo List (${currentList.length})` }</Typography>
+        <Typography variant="h6">{completed ? `Completed Todos` : `Todo List (${currentList.length})` }</Typography>
         <Typography>{comment}</Typography>
           <List>
             {currentList.map(t => (
               <ListItem
                 divider
                 key={t.id}
-                style={{ textDecoration : complited ? 'line-through' : 'none' }} 
+                style={{ textDecoration : completed ? 'line-through' : 'none' }} 
               >
                 <ListItemText primary={t.title} />
                 <ListItemSecondaryAction>
@@ -38,7 +38,7 @@ const ItemList = ({ list, complited }) => {
                     style={{ margin: "0" }}
                     onClick={() => dispatch({ type: "COMPLETE", payload: t.id })}
                   >
-                    {complited ? <Cancel /> : <CheckCircle />}
+                    {completed ? <Cancel /> : <CheckCircle />}
                   </IconButton>
                   <IconButton
                     edge="end"

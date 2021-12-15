@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Grid, Button, TextField } from "@mui/material";
-import Store from "../context";
+import Store from "../store/context";
 
 const TodoForm = () => {
   const { dispatch } = useContext(Store);
@@ -49,4 +49,5 @@ const TodoForm = () => {
     </Grid>
   );
 };
+
 export default TodoForm;
