@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Grid, Button, TextField } from "@mui/material";
-import Store from "../store/context";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../store/todoSlice"
 
 const TodoForm = () => {
-  const { dispatch } = useContext(Store);
-
+  const dispatch = useDispatch()
   const [todo, setTodo] = useState("");
 
   const handleTodoChange = e => {
@@ -15,8 +15,8 @@ const TodoForm = () => {
     if (e.keyCode === 13) handleTodoAdd();
   };
 
-  const handleTodoAdd = e => {
-    dispatch({ type: "ADD_TODO", payload: todo });
+  const handleTodoAdd = e => {    
+    dispatch(addTodo(todo));
     setTodo("");
   };
 

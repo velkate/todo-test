@@ -1,4 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { switchTheme } from "../store/themeSlice";
+
 import { makeStyles } from '@mui/styles';
 import { Menu, Brightness4, Brightness7 } from "@mui/icons-material";
 import {
@@ -9,7 +12,6 @@ import {
   Tooltip
 } from "@mui/material";
 
-import Store from "../store/context";
 import NavDrawer from "./NavDrawer";
 
 const useStyles = makeStyles(theme => ({
@@ -25,22 +27,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NavBar = () => {
-  const { state, dispatch } = useContext(Store);
+  const dispatch = useDispatch()
   const [drawerOpened, setDrawerOpened] = useState(false);
+  const theme = useSelector(state => state.theme)
 
   const classes = useStyles();
+
   let mode;
   const changeTheme = (mode) => {
-    if (state.myTheme === "dark") {
-      mode = "light";
-    } else {
-      mode = "dark";
-    }
-    dispatch({ type: "THEME", payload: mode });
+    mode = (theme === "dark") ? "light" : "dark";
+    dispatch(switchTheme(mode));
   };
 
   const ToggleButton = () => {
-    if (state.myTheme === "dark") {
+    if (theme === "dark") {
       return <Brightness7 />;
     } else {
       return <Brightness4 />;

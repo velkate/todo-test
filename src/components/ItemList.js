@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
-import Store from "../store/context";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteTodo, completeTodo } from "../store/todoSlice"
 import { Delete, CheckCircle, Cancel } from "@mui/icons-material";
 import {
   List,
@@ -12,7 +13,7 @@ import {
 } from "@mui/material";
 
 const ItemList = ({ list, completed }) => {
-  const { dispatch } = useContext(Store);
+  const dispatch = useDispatch();
 
   const currentList = completed ? list.filter(t => t.completed === true) : list.filter(t => t.completed === false)
   let comment = (currentList.length === 0) ? "So when you are free, start another work to get tired!" : "";
@@ -36,14 +37,14 @@ const ItemList = ({ list, completed }) => {
                     aria-label="complete"
                     color="primary"
                     style={{ margin: "0" }}
-                    onClick={() => dispatch({ type: "COMPLETE", payload: t.id })}
+                    onClick={() => dispatch(completeTodo(t.id))}
                   >
                     {completed ? <Cancel /> : <CheckCircle />}
                   </IconButton>
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => dispatch({ type: "DELETE", payload: t.id })}
+                    onClick={() => dispatch(deleteTodo(t.id))}
                   >
                     <Delete />
                   </IconButton>
